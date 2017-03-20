@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SORO Crime Report</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+        <div class="container-fluid">
+    <h1>South Robertson Neighborhoods Council</h1>
+    <h2>
+        Crime Report for <span data-th-text="${month}"></span> <span
+            data-th-text="${year}"></span>
+    </h2>
+    <img src="sorords.png"/>
+    <div class="rd" data-th-each="rdReport: ${rdReports}">
+    <h3 data-th-text="'LAPD Reporting District ' + ${rdReport.reportingDistrict}"></h3>
+    <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="report: ${rdReport.reports}">
+                <td data-th-text="${report.description}"></td>
+                <td data-th-text="${report.locationName}"></td>
+                <td data-th-text="${#dates.format(report.occurred, 'MMM dd, yyyy h:mm a')}"></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</body>
+</html>
